@@ -1,0 +1,8 @@
+Open notepad or another text editor in administrator mode
+
+Browse to the hosts file located at C:\Windows\System32\drivers\etc
+
+Add this to the bottom of the file and save
+
+127.0.0.1 ibattle.org
+127.0.0.1 www.ibattle.org
