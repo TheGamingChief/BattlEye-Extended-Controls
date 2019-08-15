@@ -1,0 +1,46 @@
+Battleye Extended Controls "Bec", License.
+=========================
+
+Bec Copyright © 2011-2014 by Stian Mikalsen. All rights reserved.
+
+"Software" refers to Bec "Battleye Extended Controls" and all files belonging to the program, including the documentation.
+
+Warranty disclaimer
+=========================
+The Software is provided "as-is", without any express or implied warranty, to the maximum extent permitted by applicable law.
+In no event shall the author be held liable for any damages arising from the direct or indirect use of the Software. 
+The user must assume the entire risk of using the Software, 
+knowing in particular that the Software is not designed or intended for use in hazardous environments requiring fail-safe performance, 
+where its failure to perform, misuse or inability to use adequately can 
+reasonably be expected to lead to death, personal injury, or severe physical or environmental damage. 
+
+
+
+Right of use.
+=========================
+Permission is granted to anyone to use this Software for private purpose, provided that the warranty disclaimer is accepted and the following conditions are met:
+
+1. All redistributions must keep the original package intact. you must retain all copyright notices that are currently in place, and this license without modification.
+
+2. The origin of this Software must not be misrepresented; you must not claim that you wrote the original Software.
+
+3. You may not distribute this Software and|or charge a distribution fee, you must not represent in any way that you are selling the Software itself.
+   - Exception: As a Game Service Provider you are allowed to charge a fee for Bec. However, if this is done
+     a one time payment of 50 € (euros), is required, Payment is done through Paypal. contact email for more info.
+
+4. Restrictions. Except as otherwise agreed in writing.
+   You shall have no right and you shall not permit any third party to: 
+   Decompile, decrypt, disassemble, reverse engineer or attempt to reconstruct or discover any source code or underlying ideas like, 
+   algorithms, file formats or programming or any files contained or generated using the Software by any means whatsoever.
+
+5. The Software shall not be used for any Commercial or Military purpose unless otherwise agreed in writing.
+   - Exception: see exception for rule 3
+
+6. Use of the software indicates his/her acceptance of all these terms and conditions.
+
+7. If you do not agree to these conditions, delete all files related to this software from your media|storage.
+
+
+Stian Mikalsen
+http://www.Ibattle.org
+

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- 
+This file is only provided as an example file and is not practical to use in real life.
+Make sure you take a copy of this file rename it and keep the orginale intact for orginale refrance.
+And Start using your new file Now!!
+
+Web Doc : http://www.ibattle.org/install-and-configure/setting-up-the-scheduler/
+
+BE Commands supported by the scheduler system are:
+
+say -1 some text
+loadbans
+loadscripts
+loadevents
+writebans
+maxping 250
+#shutdown
+#restart
+#reassign
+#lock
+#unlock
+#mission filename (without the .pbo extension)
+systime
+uptime
+fortune
+exit
+
+
+*****************************************************************************************************
+Description:
+*****************************************************************************************************
+
+
+Schedules are created by adding a job with id.
+The first schedule should always start with id="0"
+
+<Scheduler>
+	<job id="0">
+		<day></day>
+		<start></start>
+		<runtime></runtime>
+		<loop></loop>
+		<cmd></cmd>
+	</job>
+	<job id="1">
+		<day></day>
+		<start></start>
+		<runtime></runtime>
+		<loop></loop>
+		<cmd></cmd>
+	</job>
+</Scheduler>	
+
+The job tag has 5 sub tags.
+
+starting with:
+
+<day>.../day>
+
+The day of the week the schedule should run on.
+Days are seperated by ',' 
+<day>n</day> or <day>n,n+</day>
+
+Monday starts with 1!
+
+All days
+<day>1,2,3,4,5,6,7</day>
+
+Monday and Friday only.
+<day>1,5</day>
+
+Next:
+<start>......</start> 
+This tag may have one of two input format.
+
+Format 1:
+Contains 3 segments where each segment is a size of 2 in range of 00 - 99
+Hour Min  Sec
+[nn] [nn] [nn]
+nnnnnn
+Max value is 999999 and min value is 000000
+
+<start>000090</start>
+This will make the schedule execute 90 seconds after bec has started up and logged in.
+Note that:
+
+<start>000130</start>
+Will also make the schedule execute 90 seconds after bec has started up.
+as 90 sec is the same as 1 min and 30 sec
+
+ 
+Format 2:
+Contains 2 segments where each segment is a size of 2 in range of 00 - (23&59) and each segment is seperated by ':'
+
+Hour   Min    Sec
+[nn] : [nn] : [nn]
+
+<start>23:05:30</start>
+This will make the schedule execute precice at 23:05:30
+
+To execute a schedule at midnight use:
+<start>00:00:00</start>
+
+To execute a schedule at noon use:
+<start>12:00:00</start>
+
+
+Next:
+<runtime>....../runtime>
+This tag uses the same format as the <start> tag format 1 (hhmmss), it also only work when the loop is set to -1 or higher than 0. ie 10
+<runtime>hhmmss</runtime>
+
+
+Next:
+<loop>N</loop> 
+
+If -1 is used it means it will loop forever.
+If 0 is used the job will only be run once.
+If a number higher than 0 is used it will loop the set numbers.
+Each loop interval is set in the runtime tag. 
+
+Example.
+<runtime>001000</runtime>
+<loop>5</loop>
+
+this means that the job will loop 6 times with a 10 minute delay between each job after the jobstart
+once "start" + number of loops
+
+Next:
+<cmd>Command</cmd>
+Set the command that is to be executed.
+
+you can use external commands. example 
+<cmd>c:\path\myfile.bat</cmd>
+
+or just use a internal command.
+<cmd>uptime</cmd>
+
+SEE THE SCHEDULER_FAQ.txt for more info
+
+-->

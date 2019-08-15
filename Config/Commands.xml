@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- 
+
+	This file is only provided as an example file and might not sute your needs/demands/taste. 
+	Web Doc : http://www.ibattle.org/install-and-configure/define-commands/
+
+	Define In-game Commands
+	name  : The name you want to call your command!. DO NOT START YOUR NAME WITH #
+	group : The permission level needed to execute the command!
+	cmd   : The Rcon command. Root command. arguments are not passed here!
+	time  : leave empty except for ban commands!
+	text  : Used as reason for kick/ban commands. but also to set default values for example maxping command!
+	desc  : Used to describe the command. will be used in the help system
+	
+	###############################################################################################################################
+	
+	Note: Keep the id=  in order for your "<command id=X>" block. else parsing the file will cause errors. 1st command starts with 0
+	
+	Note: Do not start you command with # since its used by the game engine.
+	
+	Note: Group number 100 is for public use. be careful.. all players may execute commands set to group 100.
+	
+	Note: The text tag may be cut off if its too long. this is due to a limitation with Battleye.
+	
+	###############################################################################################################################
+	
+	Supported commands in the <cmd> </cmd> tag are:
+	########################
+	# Arma server commands
+	########################
+	
+	#Missions
+	#Mission 
+	#Reassign
+	#Restart
+	#Shutdown
+	#Lock
+	#Unlock
+	
+	########################
+	# Be commands.
+	########################
+	kick
+	ban
+	maxping
+	say
+	
+	########################
+	# Bec commands
+	########################
+	kid |___. same as kick and ban but. used beid insetead of names: !kid 0, !bid 3 , Use "#beclient players" to get hold of the Id. DO NOT USE "#USERLIST" thats a diffrent thing.
+	bid |
+	grant
+	degrant
+	warn
+	makeroom
+	help
+	pinfo
+	ainfo
+	uptime
+	external
+	loadadmins
+	loadcommands
+
+-->
+
+<BeCommands>	
+	
+	<!-- 
+		Shutdown the server.
+				
+		!cmdName : Instant shutdown.
+		!cmdName N : set a timer in seconds before shutdown, 
+		!cmdName abort : abort current shutdown procedure.
+		!cmdName info : display how long left to shutdown.
+		
+		Uses ArmA #shutdown command.
+	-->
+	<command id="0">
+		<name>!sht</name>
+		<group>1</group>
+		<cmd>#shutdown</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: [!sht] or [!sht N] or [!sht info] or [!sht abort] :: INFO -> Shutdowns the dedicated arma server. use: !sht N, to set a timeout in Seconds before shutdown, !sht abort, to abort current shutdown, !sht info, to see how long left.</desc>
+	</command>
+	
+	
+	<!-- 
+		Open Mission selection meny. 
+	
+		Note: 
+		An in-game ArmA Admin should be loged in before using this. 
+		Executing this command without an admin logged in may resulting in getting stuck with a black load screen!.
+		
+		Uses ArmA #missions command.
+	-->
+	<command id="1">
+		<name>!mis</name>
+		<group>1</group>
+		<cmd>#missions</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !mis :: INFO -> Show mission. Carefull with this command. an admin should be logged in with the arma interface. #login or gui if this is to be used</desc>
+	</command>	
+	
+	
+	<!-- 
+		Restart mission. 
+		Players keeps the same slot as he/she had before the restart.
+	
+		Uses ArmA #restart command.
+	-->
+	<command id="2">
+		<name>!res</name>
+		<group>4</group>
+		<cmd>#restart</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !res :: INFO -> Restart mission with current player slot selection</desc>
+	</command>	
+	
+	
+	<!-- 
+		ReAssing Player slots and restart the mission.
+		Players may not get same slots as they had.
+		
+		Uses ArmA #reassign command.
+	-->
+	<command id="3">
+		<name>!rea</name>
+		<group>4</group>
+		<cmd>#reassign</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !rea :: INFO -> Restart the mission with new player slot selection</desc>
+	</command>		
+	
+	
+	<!-- 
+		Lock down the server, No more players will be able to join the server..
+		If your server is password protected. it will also prevent players knowing the password from connecting.
+		
+		Uses ArmA #lock command.
+	-->
+	<command id="4">
+		<name>!lck</name>
+		<group>3</group>
+		<cmd>#lock</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !lck :: INFO -> Locks the server. No one will be able to join.</desc>
+	</command>	
+	
+	
+	<!-- 
+		Unlock the server. allow players to be able to connect again.
+		
+		Uses ArmA #unlock command.	
+	-->
+	<command id="5">
+		<name>!ulck</name>
+		<group>3</group>
+		<cmd>#unlock</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !ulck :: INFO -> Unlocks the Server.</desc>
+	</command>
+
+	
+	<!-- 
+		Change to a new mission.
+		You need to know the filename but exclude the pbo extension.
+		Example:
+		!cmdName abc.vr
+		!cmdName TestMission.Stratis
+		!cmdName co40_SomeGame.Altis
+		
+		Uses ArmA #mission command.
+	-->
+	<command id="6">
+		<name>!cm</name>
+		<group>4</group>
+		<cmd>#mission</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !cm mission filename  :: INFO -> Change Mission. you need to know the filename but exclude the pbo extension.</desc>
+	</command>
+
+	
+	<!-- 
+		Change the maxping value. 
+		
+		Set the ping limit on the server. Players with a ping higher than the limit will be kicked off the server.
+	
+		!cmdName : Will set what is defined in the <text> tag as the new maxping limit.
+		!cmdName N : Will set a new maxping limit to N milliseconds.
+	
+		Uses BE maxping command.
+	-->
+	<command id="7">
+		<name>!mp</name>
+		<group>3</group>
+		<cmd>maxping</cmd>
+		<time></time>
+		<text>150</text>
+		<desc>USAGE :: [!mp] or [!mp N] :: INFO -> Set a maxping limit on the server. N is the value in milliseconds, default = 150</desc>
+	</command>		
+	
+	
+	<!-- 
+		Ban a player
+	
+		The <time> tag defines how long the ban is last.
+		The time value is in minutes.
+		Value 0 is permanent ban
+	
+		The <text> tag defines the ban reason
+		
+		There are two special words that can be used in the  <text> tag. 
+		_name_ and,or _time_
+		
+		if _name_ is used in the reason text, it will replace _name_ with the name of the admin who executed the command.
+		if _time_ is used in the reason text, it will replace _time_ with the date when the player can come back.
+		
+		Uses BE ban command.
+	-->
+	<command id="8">
+		<name>!ban</name>
+		<group>0</group>
+		<cmd>ban</cmd>
+		<time>518400</time>
+		<text>You got a ban by : _name_ , come back _time_</text>
+		<desc>USAGE :: !ban name :: INFO -> Ban a player.</desc>
+	</command>	
+	
+	
+	<!-- 
+		Kick Command 
+		
+		The <text> tag defines the reason the player will be given.
+		Like the ban command, the kick support the _name_ place holder in the reason text.
+		
+		Uses BE kick command.
+	-->
+	<command id="9">
+		<name>!kick</name>
+		<group>3</group>
+		<cmd>kick</cmd>
+		<time></time>
+		<text>Decision By Admin: _name_</text>
+		<desc>USAGE :: !kick name :: INFO -> Kick a player.</desc>
+	</command>
+	
+	
+	<!-- 
+		Special Custom Commands is used with #beclient players to get players id
+		This can be usefull if you need to kick example a russian named player. "if you dont know how to type in cyrillic"
+		Example: #beclient players ... !bid 15
+		bid and kid does not support the _name_ place holder
+		
+		Uses BE ban or kick commands
+	-->
+	<!-- Ban based on BeId -->
+	<command id="10">
+		<name>!bid</name>
+		<group>0</group>
+		<cmd>bid</cmd>
+		<time>0</time>
+		<text>Admins Decision!</text>
+		<desc>USAGE :: !bid id :: INFO -> Kick a player based on the BEID. use #Beclient players to get the id.</desc>
+	</command>
+	<!-- Kick based on BeId -->
+	<command id="11">
+		<name>!kid</name>
+		<group>1</group>
+		<cmd>kid</cmd>
+		<time></time>
+		<text>Admins Decision!</text>
+		<desc>USAGE :: !kid id :: INFO -> Kick a player based on the BEID. use #Beclient players to find the id.</desc>		
+	</command>		
+
+		
+	<!-- 
+		Give a warning to a player
+		The Warnings parameter in [Misc] section in Bec config file must be higher than 0 for this to have any effect.
+	-->
+	<command id="12">
+		<name>!warn</name>
+		<group>3</group>
+		<cmd>warn</cmd>
+		<time></time>
+		<text>This is a Warning given by admin: _name_</text>
+		<desc>USAGE :: !warn name :: INFO -> Send a warning to a player and increase the warn-counter.</desc>
+	</command>
+	
+	
+	<!-- 
+		Grant a player tmp admin permissions
+		The <text> tag defines the group level for the tmp admin. 
+		Tmp admin's will be able to execute all commands in the group level you set him/her too.
+	-->
+	<command id="13">
+		<name>!ata</name>
+		<group>2</group>
+		<cmd>grant</cmd>
+		<time></time>
+		<text>4</text>
+		<desc>USAGE :: !ata name :: INFO -> Add a temporary admin into group 4.</desc>
+	</command>
+	
+	
+	<!-- Remove tmp admin permission -->
+	<command id="14">
+		<name>!rta</name>
+		<group>2</group>
+		<cmd>degrant</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !rta name :: INFO -> Remove temporary admin.</desc>		
+	</command>	
+
+	
+	<!-- 
+		Make room for a other player, kick last player(s) based on connect time to the server.
+		
+		Note: 
+		Do not use this if you have restarted Bec during a server session / mission while there was player online.
+		Reason is that Bec will no longer have their correct connect time.
+	--> 
+	<command id="15">
+		<name>!mr</name>
+		<group>2</group>
+		<cmd>makeroom</cmd>
+		<time></time>
+		<text>Making Room For Members</text>
+		<desc>USAGE :: !mr N :: INFO -> Kick N numbers of player based on join time. last joined players will get kicked.</desc>
+	</command>		
+	
+	
+	<!-- 
+		Show basic player info
+		Will send a private message back with info about the requested player such as:
+		Player: Name | Beid: N | Joined: 12:00:00 12.12 | Ip: 127.0.0.1 | Guid: 1234567898cb748f813a62af1e52579a 
+	-->
+	<command id="16">
+		<name>!pinf</name>
+		<group>2</group>
+		<cmd>pinfo</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !pinf name :: INFO -> Show player info. Beid and join time.</desc>
+	</command>
+	
+	
+	<!-- 
+		Show admins online
+		Sends back a private message with a list of Bec admins online.
+	-->
+	<command id="17">
+		<name>!ainf</name>
+		<group>100</group>
+		<cmd>ainfo</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !ainf :: INFO -> Show Admins online.</desc>
+	</command>
+	
+	
+	<!-- 
+		Reload the admin file 
+		If you have edited your admin file you can make Bec reload the data instead of restarting Bec.
+	-->
+	<command id="18">
+		<name>!raf</name>
+		<group>0</group>
+		<cmd>loadadmins</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !raf :: INFO -> Reloade the admin file.</desc>
+	</command>		
+	
+	
+	<!-- 
+		Reloade the command file 
+		If you have edited your commands file you can make Bec reloade the data instead of restarting Bec.	
+	-->
+	<command id="19">
+		<name>!rcf</name>
+		<group>0</group>
+		<cmd>loadcommands</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !rcf :: INFO -> Reloade the command file.</desc>
+	</command>
+	
+	
+	<!-- 
+		Show the current server time.
+		This will show the local time on the server not the client time.
+		It can be useful for players to determine the time zone of the server.
+		
+		The command will send back a private message to the player.
+		Server time : 02:41:51 18/12 - 2014
+	-->
+	<command id="20">
+		<name>!time</name>
+		<group>0</group>
+		<cmd>systime</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !time :: INFO -> Show server time.</desc>
+	</command>	
+
+	
+	<!-- 
+		Show the server uptime 
+		This will show how long the server has been running and when it was started (Local Server Time)
+		
+		The command will send back a private message to the player.
+		Server Uptime : 8:21:34 ~ Started : 2014-12-17 18:28:32
+		
+	-->
+	<command id="21">
+		<name>!uptime</name>
+		<group>100</group>
+		<cmd>uptime</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: !uptime :: INFO -> Show Server Uptime.</desc>
+	</command>		
+	
+	
+	<!-- 
+		Show basic help 
+
+		This will list up all commands the admin/player is allowed to execute.
+		If this is set to group 100 Normal players will be able to see all commands in group 100 ("Public commands")
+	-->
+	<command id="22">
+		<name>!help</name>
+		<group>100</group>
+		<cmd>help</cmd>
+		<time></time>
+		<text></text>
+		<desc>USAGE :: [!help] or [!help !command] :: INFO -> Use help to show available commands.</desc>
+	</command>	
+
+	
+	<!-- 
+		Send a pre-defined text message to player(s)
+		
+		Note about <time> tag.
+		If set to 1, it will send the message back as a private.
+		If you want it to be a global message for all players leave the tag empty.
+	-->
+	
+	<!-- send a private message with basic info to the admin/player who executed the command -->
+	<command id="23">
+		<name>!info</name>
+		<group>100</group>
+		<cmd>say</cmd>
+		<time>1</time>
+		<text>Use !help to get help, visit our webpage for more info.</text>
+		<desc>USAGE :: !info :: INFO -> Send a private message with general info.</desc>
+	</command>	
+	
+	
+	<!-- group 5 admin may send a global message to all players. -->
+	<command id="24">
+		<name>!notify</name>
+		<group>5</group>
+		<cmd>say</cmd>
+		<time></time>
+		<text>The Server will be restart after this mission</text>
+		<desc>USAGE :: !notify :: INFO :: Sends global message to all player</desc>
+	</command>
+	
+	
+	<!-- 
+		External scripts 
+		Note:
+		The 1st Argument Passed to a External script is always the Username "Hardcoded"
+		The 2nd,3rd,4th.. and so forth are separated by spaces.
+	-->
+	<command id="25">
+		<name>!math</name>
+		<group>2</group>
+		<cmd>external</cmd>
+		<time></time>
+		<text>Config\Script_Example.bat</text>
+		<desc>USAGE :: !math Int+Int :: INFO -> Do simple bat math!.</desc>
+	</command>	
+	
+
+</BeCommands>

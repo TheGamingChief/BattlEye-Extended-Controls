@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!-- This file is only provided as an example file and might not sute your needs/demands/taste. -->
+
+<BEAdmins>
+	<!-- 
+	Define admins.
+	
+	name : name of the admin. do not need to be ingame player name.
+	guid : match player guid.
+	group : admin level. value must be a number.
+	groupname : name of the group the admin is in, can be named anything. if groupname is empty. it will not advitised when you connect
+	
+	Note: keep <..id= > in order for your admin block. else parsing the file will cause errors. start it at 0 and increment it by 1 for each admin you add.
+	
+	http://www.ibattle.org/install-and-configure/define-admins/
+	
+	-->
+	
+	<admin id="0">
+		<name>TheGamingChief</name>
+		<guid>7298c5daa0c8f3d87e2bb16fabf1f957</guid>
+		<group>0</group>
+		<groupname>Server Owner</groupname>
+	</admin>
+	
+	<admin id="1">
+		<name>SomeName</name>
+		<guid>c1335fcdf0af5870a2ec12ad5a34c206</guid>
+		<group>3</group>
+		<groupname>Admin</groupname>
+	</admin>
+	
+</BEAdmins>

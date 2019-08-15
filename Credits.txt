@@ -1,0 +1,26 @@
+Thanks to!
+
+Sebastian. aka $able for support regarding BERcon protocole issues.
+Stian Strand. aka Sup@hKing. for supplying test environment.
+Daniel Koch. aka Kochleffel. for supplying test environment in Bec's early days. 
+
+
+A Big thanks to all who has Donated!
+Karl Lawrence,
+Damian Hayden,
+Fabien Lefevre,
+Ivanov Alexander,
+Claus Lauridsen,
+Cintia D Fernandes,
+Travis Prue,
+Dennie Bosch,
+Florian Weber,
+Anthony Hartfield,
+Luc Mathlin,
+John Rhodes,
+Gorlov Nikita,
+Elias Toft Hansen,
+Александр Лежепеков,
+
+And all the others who uses Bec, and the forgotten names who has donated and reported bugs and issues etc.
+By. Stian Mikalsen.

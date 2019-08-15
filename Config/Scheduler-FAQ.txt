@@ -1,0 +1,183 @@
+
+Frequently asked questions about the scheduler!
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+Q: I don't really understand the two time formats.
+	What's this hhmmss and hh:mm:ss all about? 
+	
+A: When we are dealing with Bec time system there are two format and they behave very differently in what they do.
+   To say it simple. hh:mm:ss is for a specific time of the day and this is set in military time.
+   so example 18:00:00 is the same as 6 Pm and 06:00:00 is 6 Am. 
+   (Bec inputs its range in 00:00:00 to max 23:59:59) for this format.
+      
+   Now this other format hhmmss works a bit differently and needs a bit more explaining. 
+   Its basically a countdown format where you divide it up in three sections. [HH] , [MM], [SS]
+   The first two are the hours. the middle two are the minutes and the last two are the seconds.
+   (Bec inputs its range in 000000 to max 999999) for this format.
+   
+   Example 010101 means the job is to be run after 1 hour, 1 minute and 1 second.
+   Where as example 101010 the job is to be run after 10 hours 10 minutes and 10 seconds
+   
+   This can also be a bit confusing since you can specify the same "countdown" in several ways.
+   Example a job is to be run every 1 minute and 30 seconds can be defined two ways.
+   000130 or 000090
+
+   
+
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------   
+Q: Why does none of my schedules work, been editing for hours for no use. :/
+
+A: Because Bec is very strict when it comes to the Scheduler system, it does not tolerate any errors.
+   Check your Error log for errors, if you have as much as one error related to the scheduler, no tasks will work.
+   
+   THE Scheduler.xml NEEDS TO BE PERFECTLY EDITED WITH CORRECT SETTINGS FOR ALL TAGS. PERIOD.
+   
+   Bec will write the errors both to the screen and to the error logfile. 
+   If you can not check the console window then take a look in your Bec directory. 
+   C:\YourPath\Bec\Log\CfgName\Error\BecError_Date.log
+   
+   
+   
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+Q: I want to have two messages running every 20 sec. but show them 10 seconds apart, how to do this?
+
+A: You can do something like this
+
+	<job id='0'>
+		<day>1,2,3,4,5,6,7</day>
+		<start>000020</start>
+		<runtime>000020</runtime>
+		<loop>-1</loop>
+		<cmd>say -1 text 1</cmd>
+	</job>
+	<job id='1'>
+		<day>1,2,3,4,5,6,7</day>
+		<start>000030</start>
+		<runtime>000020</runtime>
+		<loop>-1</loop>
+		<cmd>say -1 text 2</cmd>
+	</job>	
+	
+
+  As you can see the job 0 will start after 20 seconds. but job 1 will start after 30.
+  Thus there will be a 10 second offset between the two messages.
+
+  18:00:20 : RCon admin #0: (Global) text 1
+  18:00:30 : RCon admin #0: (Global) text 2
+  18:00:40 : RCon admin #0: (Global) text 1
+  18:00:50 : RCon admin #0: (Global) text 2
+
+  
+  
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------   
+Q: I want to have a message run every N (Hour, Min, Sec) on my server but stop showing it after 10 times.
+
+A: You can do something like this.
+
+	<job id='0'>
+		<day>1,2,3,4,5,6,7</day>
+		<start>010000</start>
+		<runtime>010000</runtime>
+		<loop>9</loop>
+		<cmd>say -1 text xyz</cmd>
+	</job>
+   
+   This will start the job after one hour and show the message, it will continue to show the message nine times more, once each hour
+
+ 
+ 
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+Q: How can i set a task to repeat itself within a give time frame of the day. ? 
+   Example i want to show message: "Wherez My Beer Dude" every 15 min from 18:00:00 to 20:00:00
+   I don't want to create tons of jobs nor do i want to have same message repeating itself all time.
+
+A: You can not stop a task at a precise time. 
+   but we can do this somewhat. We will be using the hh:mm:ss in start tag and some simple math.
+   
+   So. from 18:00 to 20:00 there is 120 minutes.. ok so we know the total minutes it should be active.
+   Now to do an estimate: 120 total min / 15 min interval = 8 
+   So we are left with 8 times the messages should be show.
+   
+   we just put this in our scheduler file
+   
+   	<job id='0'>
+		<day>1,2,3,4,5,6,7</day>
+		<start>18:00:00</start> 
+		<runtime>001500</runtime>
+		<loop>7</loop>
+		<cmd>say -1 Wherez My Beer Dude</cmd>
+	</job>
+   
+    We don't use loop 8, but 7 because we show the message once then repeat it 7 times more with 15 min apart.
+	In total 8 messages will be shown 
+   
+   
+   
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+Q: I have a job that is set to use a external bat script. but it doesn't work.
+
+A: There could be several reasons to it. 
+    
+	-*- Check List -*-
+   
+   1 - Check your path in your scheduler.xml file, make sure its the full path and set correct.
+   Thought Bec should detect this if its wrong.
+   
+   
+   2 - if Bec is started up with the --dec parameter, it will be auto disabled.
+   (Bec.exe -f my_config.cfg --dec ) disables Bec from using external commands.
+   This is the case for both the Scheduler.xml and the Commands.xml file
+    
+   GameHosters that are using Bec and not using (--dec) sets them self at a security risk.
+   But that another story and not really my problem.
+
+   
+   3 - Try run it in CMD.exe, see how it works without Bec. 
+   
+   
+   4 - Keep in mind that the CWD (Current Work Directory) your bat|cmd script or program will have is the same as your Bec install.
+	   Let say the path you have your Bec installed is at (C:\Tools\Bec).
+	   This is and will be the CWD of your script even if its located in C:\Scripts\Myfile.bat or some other place.
+	   
+	   Depending on your script and what it does, you might need to set a new work-dir by editing your script with something like:
+	   ::--------------------
+	   set NewCWD="C:\Scripts\"
+       cd /d %NewCWD%
+	   
+	   do stuff
+	   ::--------------------
+	   
+	   
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+Q: Which commands does the scheduler support?
+
+A: The scheduler supports these commands in the <cmd> tag.
+
+say -1 some text
+loadbans
+loadscripts
+loadevents
+writebans
+maxping 250
+#shutdown
+#restart
+#reassign
+#lock
+#unlock
+#mission filename (without the .pbo extension)
+systime
+uptime
+fortune
+exit
+
+   
+   
