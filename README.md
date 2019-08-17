@@ -12,6 +12,8 @@ You will also need to add the following lines to the end of your hosts file. Mor
 127.0.0.1 ibattle.org
 127.0.0.1 www.ibattle.org
 ```
+Note:
+If you have not created a bans.txt file in your Battleye directory you will see [this](https://i.imgur.com/bJkWRRx.jpg) error while trying to start BEC. You must create a bans.txt file in your Battleye directory to make this error go away.
 
 ## Implementation
 
