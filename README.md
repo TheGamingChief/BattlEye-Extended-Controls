@@ -6,6 +6,8 @@ BattlEye-Extended-Controls (BEC) is a program created by nuxil/Stian Mikalsen. T
 
 Installation of BEC is rather simple, download this repository and create a BEC folder somewhere on the machine that is hosting your server. Then copy all the files included in the download into your new BEC folder.
 
+Once everything is copied into your new BEC folder you will need to open the Config folder included, and navigate to the Config.cfg file. You MUST change the BePath to match up with your Battleye directory.
+
 You will also need to add the following lines to the end of your hosts file. More information and instructions on how to do this can be found [here](https://github.com/TheGamingChief/BattlEye-Extended-Controls/blob/master/How%20to%20edit%20hosts%20file.txt).
 
 ```bash
@@ -21,7 +23,7 @@ There are several different ways to implement BEC into your current Start Server
 
 Method #1 (Recommended):
 
-Use one single batch file that updates your DayZ server, starts your DayZ server, starts BEC, and checks for server/BEC crashes. An example of a single batch file that accomplishes all of this at once is available [here](https://pastebin.com/yHgZLT4b). Keep in mind there are several things you will need to change in that batch file to suit your own environment, most notably lines 5, 7, 8, 9, and 65. If you have issues using this batch file I recommend you watch my video where I go over this [here NEEDS VIDEO LINK ONCE VIDEO GOES LIVE](https://google.com).
+Use one single batch file that updates your DayZ server, starts your DayZ server, starts BEC, and checks for server/BEC crashes. An example of a single batch file that accomplishes all of this at once is available [here](https://pastebin.com/yHgZLT4b). Keep in mind there are several things you will need to change in that batch file to suit your own environment, most notably lines 5, 7, 8, 9, and 65. If you have issues using this batch file I recommend you watch my video where I go over this [here](https://youtu.be/IrIEj6o9YoM).
 
 Method #2 (Not Recommended):
 
