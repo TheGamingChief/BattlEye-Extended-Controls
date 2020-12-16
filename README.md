@@ -1,3 +1,4 @@
+
 # BattlEye-Extended-Controls
 
 BattlEye-Extended-Controls (BEC) is a program created by nuxil/Stian Mikalsen. This utility was created for ArmA 2 and ArmA 3 to take advantage of the Rcon protocol and provide tools for game server owners and administrators. BEC while originally made for ArmA 2 and ArmA 3 still works just fine for DayZ SA since the Rcon protocol has not changed much.
@@ -23,9 +24,28 @@ There are several different ways to implement BEC into your current Start Server
 
 Method #1 (Recommended):
 
-Use one single batch file that updates your DayZ server, starts your DayZ server, starts BEC, and checks for server/BEC crashes. An example of a single batch file that accomplishes all of this at once is available [here](https://pastebin.com/yHgZLT4b). Keep in mind there are several things you will need to change in that batch file to suit your own environment, most notably lines 5, 7, 8, 9, and 65. If you have issues using this batch file I recommend you watch my video where I go over this [here](https://youtu.be/IrIEj6o9YoM).
+If you use OmegaManager this is probably the best option. You can place the BEC files in any folder in your DayZ server, and create a very small batch file with the following contents.
 
-Method #2 (Not Recommended):
+```
+cd "C:\Servers\DayZ\servers\0\BEC"
+start Bec.exe -f Config.cfg --dsc
+```
+(Make sure you change the directory to match the location you put BEC)
+
+Once the batch file is created you can open the OmegaManger server manager page, go to your server's overview, Omega instance configuration. Once on this tab enable pre-execution script, and enter the full path of the batch file you just created.
+
+Make sure you update the Config.cfg file to reflect your BE location.
+
+For more information about setting up BEC, checkout [this video](https://link.thegamingchief.com/SSwLicLJ7M-GH).
+
+
+**Method #2 (Also Recommended):**
+
+Use one single batch file that updates your DayZ server, starts your DayZ server, starts BEC, and checks for server/BEC crashes. An example of a single batch file that accomplishes all of this at once is available [here](https://pastebin.com/yHgZLT4b). Keep in mind there are several things you will need to change in that batch file to suit your own environment, most notably lines 5, 7, 8, 9, and 65. If you have issues using this batch file I recommend you watch my video where I go over this [here](https://link.thegamingchief.com/IrIEj6o9YoM-GH).
+
+Make sure you update the Config.cfg file to reflect your BE location.
+
+**Method #3 (Not Recommended):**
 
 Another method of starting BEC would be to create your own batch file (or include it in your start-server batch file) to starts BEC. Please keep in mind when starting BEC.exe you need to use the -f Config.cfg --dsc flags. An example of this is below.
 
@@ -34,9 +54,13 @@ cd "C:\Servers\BEC"
 start Bec.exe -f Config.cfg --dsc
 ```
 
-Method #3 (Really Not Recommended):
+Make sure you update the Config.cfg file to reflect your BE location.
+
+**Method #4 (Really Not Recommended):**
 
 You can also choose to run BEC manually if you wanted to do this for some odd reason. However, you can not just run the BEC.exe because you need to run it with the -f Config.cfg --dsc flags. This can be achieved by creating a shortcut of BEC.exe and adding those flags so your shortcut looks something like [this](https://i.imgur.com/8jhwW7P.jpg).
+
+Make sure you update the Config.cfg file to reflect your BE location.
 
 ## The Scheduler
 The Scheduler is an extremely powerful tool that comes with BEC. This tool allows you to schedule tasks such as automated messages, automated shutdown, ETC. The Scheduler is configured via the Scheduler.xml file.
